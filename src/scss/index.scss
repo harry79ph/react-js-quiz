@@ -1,0 +1,276 @@
+@import "config";
+
+body {
+  font-family: $font-stack;
+  color: darken($nav-background-color, 45);
+  background-color: lighten($nav-background-color, $amount: 44);
+  min-height: 800px;
+}
+
+.form-check label {
+  margin-left: 5px;
+}
+.alert-text {
+  font-size: 24px;
+}
+
+.myBtn {
+  @include button-control($main-colour, $background-color);
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 5%;
+  background-color: $nav-background-color;
+  color: $background-color;
+  font-weight: 400;
+  font-size: 20px;
+  a {
+    display: inline-block;
+    text-decoration: none;
+    color: lighten($nav-background-color, 35);
+    padding: 5px 10px;
+    &:hover {
+      color: lighten($nav-background-color, 40);
+    }
+    &.active {
+      color: $background-color;
+    }
+  }
+  .side-menu {
+    display: flex;
+  }
+  li {
+    list-style-type: none;
+  }
+}
+
+.home {
+  margin: 20vh auto;
+  text-align: center;
+  h2 {
+    padding: 20px;
+  }
+  p {
+    margin: 10px 0;
+  }
+  .myBtn {
+    margin: 10px;
+    @include button-control($main-colour, $background-color);
+    text-decoration: none;
+  }
+}
+
+.enter-details {
+  margin: 20vh auto;
+  padding: 10px;
+  .create {
+    max-width: 600px;
+    min-height: 40vh;
+    margin: 0 auto;
+    @include white-block;
+    h2 {
+      padding: 1.2em;
+      text-align: center;
+    }
+    form {
+      padding: 5px;
+      display: flex;
+      flex-direction: column;
+      margin: 0 auto;
+      width: calc(100% - 30px);
+      .form-group {
+        padding: 0 10px;
+        margin-bottom: 10px;
+        label {
+          @include label-control;
+        }
+        input {
+          @include input-control($main-colour, $background-color);
+        }
+      }
+      .buttons {
+        display: flex;
+        justify-content: center;
+        margin: 5px;
+        .myBtn {
+          margin: 5px;
+          text-decoration: none;
+        }
+        input {
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+.quiz {
+  padding: 10px;
+  p {
+    font-weight: 500;
+    padding: 30px 5px 10px;
+    text-align: center;
+  }
+  form {
+    padding: 10px;
+    .questions {
+      display: flex;
+      flex-wrap: wrap;
+      .question {
+        flex: 1 0 500px;
+        margin: 10px;
+        padding: 15px 10px 15px 20px;
+        @include white-block;
+        p {
+          font-weight: 400;
+          text-align: start;
+        }
+        label {
+          margin: 3px;
+        }
+      }
+    }
+    .button-group {
+      .myBtn {
+        @include button-control;
+        margin: 20px;
+      }
+    }
+  }
+}
+
+.results {
+  margin: 10px;
+  text-align: center;
+  p{
+    padding: 16px;
+    font-size: 18px;
+  }
+  .error{
+    color: $nav-background-color;
+  }
+  .wrapper {
+    margin: 5em auto;
+    .loader {
+      padding: 16px;
+      color: inherit;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 20px;
+      font-weight: 500;
+      text-align: center;
+      &:after {
+        content: " .";
+        animation: dots 1s steps(5, end) infinite;
+      }
+    }
+    .title {
+      font-size: 20px;
+      font-weight: 500;
+      padding: 30px 5px;
+      text-align: center;
+    }
+    table {
+      box-shadow: 5px 5px 12px 4px rgba(0, 0, 0, 0.05);
+      border-collapse: collapse;
+      font-size: 18px;
+      margin: 0 auto;
+      width: 60%;
+      max-width: 800px;
+      text-align: start;
+      tr {
+        th {
+          color: $background-color;
+          border: 1px solid lighten($nav-background-color, $amount: 20);
+          padding: 12px 8px;
+          background-color: $nav-background-color;
+        }
+        td {
+          color: inherit;
+          padding: 8px;
+          &.score {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            button{
+              margin-left: 3px;
+              padding: 0.3rem 0.4rem;
+              font-size: 0.8rem;
+            }
+          }
+        }
+      }
+      tr:nth-child(even) {
+        background-color: lighten($nav-background-color, $amount: 30);
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  nav {
+    padding: 1px 8px;
+  }
+  .enter-details {
+    .create {
+      width: 90vw;
+      form {
+        width: 100%;
+      }
+    }
+  }
+
+  .quiz {
+    padding: 10px;
+    font-size: 14px;
+    p {
+      font-weight: 400;
+    }
+    form {
+      padding: 10px;
+      .questions {
+        .question {
+          flex: 1 0 300px;
+          margin: 10px;
+          padding: 10px;
+          label {
+            line-height: 2;
+          }
+        }
+      }
+    }
+  }
+
+  .results {
+    margin: 0;
+    p {
+      font-weight: 500;
+      padding: 30px 5px 10px;
+      text-align: center;
+    }
+    .wrapper {
+      div {
+        margin: 3px;
+        overflow-y: auto;
+        table {
+          font-size: 14px;
+          width: 100%;
+          tr {
+            td {
+              max-width: 220px;
+              word-wrap: break-word;
+              .myBtn {
+                padding: 0.25rem 0.3rem;
+                margin-left: 3px;
+                font-size: 14px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
