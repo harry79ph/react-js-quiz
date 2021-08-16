@@ -25,7 +25,7 @@ const Quiz = ({ details, setDetails }) => {
             }
         });
         const userPoints = (counter / correctAnswers.length) * 100;
-        setDetails((prev) => ({ ...prev, score: userPoints, createdAt: timeStamp }));
+        setDetails(prev => ({ ...prev, score: userPoints, createdAt: timeStamp }));
     }
 
     useEffect(() => {
@@ -49,7 +49,7 @@ const Quiz = ({ details, setDetails }) => {
 
     return (
         <div className="quiz">
-            <p>You will get 25 points for each correct answer. At the end of the Quiz, your total score will be displayed. Maximum score is 100 points.</p>
+            <h4>You will get 25 points for each correct answer. At the end of the Quiz, your total score will be displayed. Maximum score is 100 points.</h4>
             <form onSubmit={onSubmit}>
                 <div className="questions">
                     {questions.map((q, index) => {
