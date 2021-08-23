@@ -5,6 +5,10 @@
   box-sizing: border-box;
 }
 
+a {
+  text-decoration: none;
+}
+
 .wrapper {
   margin: 10px auto;
 }
@@ -84,7 +88,6 @@ nav {
 
 nav a {
   display: inline-block;
-  text-decoration: none;
   color: #f2dce6;
   padding: 5px 10px;
 }
@@ -135,8 +138,6 @@ nav li {
   color: #fff;
   border-radius: 0.25rem;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  text-decoration: none;
-  padding: 0.5rem 0.75rem 0.6rem;
   font-weight: 500;
 }
 
@@ -215,7 +216,6 @@ nav li {
 
 .enter-details .create form .buttons .myBtn {
   margin: 5px;
-  text-decoration: none;
 }
 
 .enter-details .create form .buttons input {

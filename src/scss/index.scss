@@ -29,7 +29,6 @@ nav {
   font-size: 20px;
   a {
     display: inline-block;
-    text-decoration: none;
     color: lighten($nav-background-color, 35);
     padding: 5px 10px;
     &:hover {
@@ -59,8 +58,6 @@ nav {
   .myBtn {
     margin: 10px;
     @include button-control($main-colour, $background-color);
-    text-decoration: none;
-    padding: 0.5rem 0.75rem 0.6rem;
     font-weight: 500;
   }
 }
@@ -99,7 +96,6 @@ nav {
         margin: 5px;
         .myBtn {
           margin: 5px;
-          text-decoration: none;
         }
         input {
           display: block;
