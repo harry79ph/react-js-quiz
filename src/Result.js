@@ -37,7 +37,7 @@ const Result = () => {
             setIsPending(false);
             setUsers(null);
             console.log('get error name: ' + err.name + ' get error message: ' + err.message);
-            showAlert('get error: ' + err);
+            showAlert(err);
         });
     }
 
@@ -59,13 +59,12 @@ const Result = () => {
             setIsPending(false);
             setUsers(null);
             console.log('delete error name: ' + err.name);
-            if (err.name !== 'TypeError') showAlert('delete error: ' + err);
+            if (err.name !== 'TypeError') showAlert(err);
         });
     }
     console.log(users);
 
     const handleReload = () => {
-        //window.location.reload();
         getData();
     }
 

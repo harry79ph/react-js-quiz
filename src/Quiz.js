@@ -67,7 +67,7 @@ const Quiz = ({ details, setDetails }) => {
                 </div>
                 <div className="button-group">
                     {details && <input className="myBtn" type="submit"/>}
-                    {(isPending && isPending) && <button className="loader myBtn">Loading</button>}
+                    {(isPending && isPending) && <button className="myBtn loader">Loading</button>}
                     {(!details && !isPending) && <Link to="/result" className="myBtn">See all results</Link>}
                 </div>
             </form>
