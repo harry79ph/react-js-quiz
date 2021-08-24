@@ -59,15 +59,14 @@ const Result = () => {
             setIsPending(false);
             setUsers(null);
             console.log('delete error name: ' + err.name);
-            if (err.name !== 'TypeError') {
-                showAlert('delete error: ' + err);
-            }
+            if (err.name !== 'TypeError') showAlert('delete error: ' + err);
         });
     }
     console.log(users);
 
     const handleReload = () => {
-        window.location.reload();
+        //window.location.reload();
+        getData();
     }
 
     return (

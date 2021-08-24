@@ -107,7 +107,7 @@ nav {
 
 .quiz {
   padding: 5vw;
-  h4{
+  h4 {
     font-weight: 500;
     text-align: center;
     padding-bottom: 30px;
@@ -140,6 +140,10 @@ nav {
         @include button-control;
         margin: 20px;
       }
+      .loader{
+        padding: 0.5rem 1rem 0.5rem 0.75rem;
+        pointer-events: none;
+      }
     }
   }
 }
@@ -147,27 +151,16 @@ nav {
 .results {
   margin: 10px;
   text-align: center;
-  p{
+  p {
     padding: 16px;
     font-size: 18px;
   }
-  .error{
+  .error {
     color: $nav-background-color;
   }
   .wrapper {
     margin: 5em auto;
-    .loader {
-      padding: 16px;
-      color: inherit;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 20px;
-      font-weight: 500;
-      text-align: center;
-      &:after {
-        content: " .";
-        animation: dots 1s steps(5, end) infinite;
-      }
-    }
+    
     .title {
       font-size: 20px;
       font-weight: 500;
@@ -179,7 +172,6 @@ nav {
       border-collapse: collapse;
       font-size: 18px;
       margin: 0 auto;
-      width: 60%;
       max-width: 800px;
       text-align: start;
       tr {
@@ -198,7 +190,7 @@ nav {
             justify-content: space-between;
             align-items: center;
             font-weight: 600;
-            button{
+            button {
               margin-left: 3px;
               padding: 0.3rem 0.4rem;
               font-size: 0.8rem;
@@ -229,7 +221,7 @@ nav {
   .quiz {
     padding: 10px;
     font-size: 14px;
-    h4{
+    h4 {
       padding: 5px;
     }
     p {
@@ -261,16 +253,40 @@ nav {
         overflow-y: auto;
         table {
           font-size: 14px;
-          width: 100%;
+          max-width: 100%;
+          word-wrap: break-word;
           tr {
             td {
               max-width: 220px;
-              word-wrap: break-word;
               .myBtn {
                 padding: 0.25rem 0.3rem;
                 margin-left: 3px;
                 font-size: 14px;
               }
+            }
+            td:nth-child(2) {
+              max-width: 10em;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .results {
+    .wrapper {
+      div {
+        margin: 2px;
+        table {
+          max-width: 98%;
+          tr {
+            td {
+              max-width: 150px;
+            }
+            td:nth-child(2) {
+              max-width: 8em;
             }
           }
         }

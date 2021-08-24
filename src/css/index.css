@@ -13,6 +13,20 @@ a {
   margin: 10px auto;
 }
 
+.loader {
+  padding: 16px;
+  color: inherit;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.loader:after {
+  content: " .";
+  animation: dots 1s steps(5, end) infinite;
+}
+
 @keyframes dots {
   0%,
   20% {
@@ -195,7 +209,7 @@ nav li {
   width: 100%;
   padding: 0.5rem 0.75rem;
   font-size: 1rem;
-  font-weight: 400;
+  font-weight: 500;
   background-clip: padding-box;
   box-shadow: 0 0 0 3px transparent;
   border-radius: 0.25rem;
@@ -293,6 +307,11 @@ nav li {
   box-shadow: 0 0 0 3px #557798;
 }
 
+.quiz form .button-group .loader {
+  padding: 0.5rem 1rem 0.5rem 0.75rem;
+  pointer-events: none;
+}
+
 .results {
   margin: 10px;
   text-align: center;
@@ -311,20 +330,6 @@ nav li {
   margin: 5em auto;
 }
 
-.results .wrapper .loader {
-  padding: 16px;
-  color: inherit;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 20px;
-  font-weight: 500;
-  text-align: center;
-}
-
-.results .wrapper .loader:after {
-  content: " .";
-  animation: dots 1s steps(5, end) infinite;
-}
-
 .results .wrapper .title {
   font-size: 20px;
   font-weight: 500;
@@ -337,7 +342,6 @@ nav li {
   border-collapse: collapse;
   font-size: 18px;
   margin: 0 auto;
-  width: 60%;
   max-width: 800px;
   text-align: start;
 }
@@ -418,16 +422,34 @@ nav li {
   }
   .results .wrapper div table {
     font-size: 14px;
-    width: 100%;
+    max-width: 100%;
+    word-wrap: break-word;
   }
   .results .wrapper div table tr td {
     max-width: 220px;
-    word-wrap: break-word;
   }
   .results .wrapper div table tr td .myBtn {
     padding: 0.25rem 0.3rem;
     margin-left: 3px;
     font-size: 14px;
+  }
+  .results .wrapper div table tr td:nth-child(2) {
+    max-width: 10em;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .results .wrapper div {
+    margin: 2px;
+  }
+  .results .wrapper div table {
+    max-width: 98%;
+  }
+  .results .wrapper div table tr td {
+    max-width: 150px;
+  }
+  .results .wrapper div table tr td:nth-child(2) {
+    max-width: 8em;
   }
 }
 /*# sourceMappingURL=index.css.map */

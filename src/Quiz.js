@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import useAlert from './useAlert';
 import quizValues from './quizValues';
@@ -8,6 +8,7 @@ import firebase from './fbConfig';
 const Quiz = ({ details, setDetails }) => {
 
     const { options, correctAnswers, questions } = quizValues;
+    const [isPending, setIsPending] = useState(false);
     const history = useHistory();
     const { showAlert } = useAlert('question', () => {
         history.push('/result');
@@ -15,14 +16,12 @@ const Quiz = ({ details, setDetails }) => {
 
     function onSubmit(e) {
         e.preventDefault();
+        const userAnswers = [e.target.q0.value, e.target.q1.value, e.target.q2.value, e.target.q3.value];
         const now = new Date();
         const timeStamp = firebase.firestore.Timestamp.fromDate(now);
-        const userAnswers = [e.target.q0.value, e.target.q1.value, e.target.q2.value, e.target.q3.value];
         let counter = 0;
         userAnswers.forEach((answer, i) => {
-            if (answer === correctAnswers[i]) {
-                counter++;
-            }
+            if (answer === correctAnswers[i]) counter++;
         });
         const userPoints = (counter / correctAnswers.length) * 100;
         setDetails(prev => ({ ...prev, score: userPoints, createdAt: timeStamp }));
@@ -31,21 +30,19 @@ const Quiz = ({ details, setDetails }) => {
     useEffect(() => {
         if (details !== null && details.score) {
             const db = firebase.firestore();
+            setIsPending(true);
             db.collection('users').add(details).then((snapshot) => {
+                setIsPending(false);
                 console.log(snapshot);
-                if (snapshot.empty && snapshot.metadata.fromCache) {
-                    throw new Error('Failed to fetch');
-                }
+                console.log("Document written with ID: ", snapshot.id);
                 showAlert(details.score);
             }).catch((err) => {
-                console.log(err);
+                console.error("Error adding document: ", err);
             });
-            if (details !== null) {
-                setDetails(null);
-            }
+            if (details !== null) setDetails(null);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [details, setDetails]);
+    }, [details]);
 
     return (
         <div className="quiz">
@@ -69,8 +66,9 @@ const Quiz = ({ details, setDetails }) => {
                     })}
                 </div>
                 <div className="button-group">
-                    {details && <input className="myBtn" type="submit" />}
-                    {!details && <Link to="/result" className="myBtn">See all results</Link>}
+                    {details && <input className="myBtn" type="submit"/>}
+                    {(isPending && isPending) && <button className="loader myBtn">Loading</button>}
+                    {(!details && !isPending) && <Link to="/result" className="myBtn">See all results</Link>}
                 </div>
             </form>
         </div>
