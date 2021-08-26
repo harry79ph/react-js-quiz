@@ -274,8 +274,24 @@ nav li {
   text-align: start;
 }
 
-.quiz form .questions .question label {
-  margin: 3px;
+.quiz form .questions .question .selection {
+  position: relative;
+}
+
+.quiz form .questions .question .selection input[type="radio"] {
+  height: 1.2em;
+  width: 1.2em;
+}
+
+.quiz form .questions .question .selection input[type="radio"]:hover {
+  cursor: pointer;
+}
+
+.quiz form .questions .question .selection label {
+  position: absolute;
+  display: inline-block;
+  line-height: 1.2em;
+  margin-left: 5px;
 }
 
 .quiz form .button-group .myBtn {

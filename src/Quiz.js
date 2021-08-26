@@ -55,7 +55,7 @@ const Quiz = ({ details, setDetails }) => {
                                 <p>{q.question}</p>
                                 {q.selections.map((selection, i) => {
                                     return (
-                                        <div className="selections">
+                                        <div className="selection">
                                             <input type="radio" name={'q' + index} defaultValue={options[i]} required="required" />
                                             <label>{selection}</label>
                                         </div>

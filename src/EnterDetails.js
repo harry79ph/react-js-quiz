@@ -15,7 +15,7 @@ const EnterDetails = ({ details, setDetails }) => {
     const handleSubmit = e => {
         e.preventDefault();
         setDetails({ name: e.target.name.value, email: e.target.email.value });
-        history.push('/quiz');
+        history.push('/details/quiz');
     }
     console.log(details);
 

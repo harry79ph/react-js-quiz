@@ -130,8 +130,21 @@ nav {
           font-weight: 400;
           text-align: start;
         }
-        label {
-          margin: 3px;
+        .selection{
+          position: relative;
+          input[type="radio"]{
+            height: 1.2em;
+            width: 1.2em;
+          }
+          input[type="radio"]:hover{
+            cursor: pointer;
+          }
+          label {
+            position: absolute;
+            display: inline-block;
+            line-height: 1.2em;
+            margin-left: 5px;
+          }
         }
       }
     }

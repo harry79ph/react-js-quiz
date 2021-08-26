@@ -17,10 +17,10 @@ function App() {
           <Route exact path="/">
             <Home />
           </Route>
-          <Route path="/details">
+          <Route exact path="/details">
             <EnterDetails details={details} setDetails={setDetails} />
           </Route>
-          <Route path="/quiz">
+          <Route path="/details/quiz">
             <Quiz details={details} setDetails={setDetails} />
           </Route>
           <Route path="/result">
