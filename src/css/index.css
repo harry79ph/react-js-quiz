@@ -281,6 +281,11 @@ nav li {
 .quiz form .questions .question .selection input[type="radio"] {
   height: 1.2em;
   width: 1.2em;
+  transition: all 0.2s ease-in;
+}
+
+.quiz form .questions .question .selection input[type="radio"]:checked {
+  transform: scale(1.1);
 }
 
 .quiz form .questions .question .selection input[type="radio"]:hover {

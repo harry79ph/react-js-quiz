@@ -135,6 +135,10 @@ nav {
           input[type="radio"]{
             height: 1.2em;
             width: 1.2em;
+            transition: all 0.2s ease-in;
+          }
+          input[type="radio"]:checked {
+            transform: scale(1.1);
           }
           input[type="radio"]:hover{
             cursor: pointer;
