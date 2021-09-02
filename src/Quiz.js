@@ -7,11 +7,15 @@ import firebase from './fbConfig';
 
 const Quiz = ({ details, setDetails }) => {
 
+    const db = firebase.firestore();
     const { options, correctAnswers, questions } = quizValues;
     const [isPending, setIsPending] = useState(false);
     const history = useHistory();
     const { showAlert } = useAlert('question', () => {
         history.push('/result');
+    });
+    const { showAlert: showErr } = useAlert('error', () => {
+        history.push('/');
     });
 
     function onSubmit(e) {
@@ -28,8 +32,19 @@ const Quiz = ({ details, setDetails }) => {
     }
 
     useEffect(() => {
+        db.collection('users').get().then((ss) => {
+            if (ss.empty && ss.metadata.fromCache) {
+                throw new Error('Please check your connection');
+            }
+        }).catch(err => {
+            showErr(err);
+            console.log(err);
+        });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[]);
+
+    useEffect(() => {
         if (details !== null && details.score) {
-            const db = firebase.firestore();
             setIsPending(true);
             db.collection('users').add(details).then((snapshot) => {
                 setIsPending(false);
@@ -66,8 +81,8 @@ const Quiz = ({ details, setDetails }) => {
                     })}
                 </div>
                 <div className="button-group">
-                    {details && <input className="myBtn" type="submit"/>}
-                    {(isPending && isPending) && <button className="myBtn loader">Loading</button>}
+                    {(details && !isPending) && <input className="myBtn" type="submit"/>}
+                    {isPending && <button className="myBtn loader">Loading</button>}
                     {(!details && !isPending) && <Link to="/result" className="myBtn">See all results</Link>}
                 </div>
             </form>
