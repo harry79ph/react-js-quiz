@@ -38,7 +38,6 @@ const Quiz = ({ details, setDetails }) => {
             }
         }).catch(err => {
             showErr(err);
-            console.log(err);
         });
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
@@ -49,12 +48,11 @@ const Quiz = ({ details, setDetails }) => {
             db.collection('users').add(details).then((snapshot) => {
                 setIsPending(false);
                 console.log(snapshot);
-                console.log("Document written with ID: ", snapshot.id);
                 showAlert(details.score);
+                setDetails(null);
             }).catch((err) => {
                 console.error("Error adding document: ", err);
             });
-            if (details !== null) setDetails(null);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [details]);

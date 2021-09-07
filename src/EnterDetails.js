@@ -17,7 +17,6 @@ const EnterDetails = ({ details, setDetails }) => {
         setDetails({ name: e.target.name.value.trim(), email: e.target.email.value.trim() });
         history.push('/details/quiz');
     }
-    console.log(details);
 
     return (
         <div className="enter-details">
