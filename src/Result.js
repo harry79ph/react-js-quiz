@@ -83,8 +83,8 @@ const Result = () => {
                             <th>Date</th>
                             <th>Score</th>
                         </tr>
-                        {users.map((user) => (
-                            <tr>
+                        {users.map((user, key) => (
+                            <tr key={key}>
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
                                 <td>{user.created}</td>
