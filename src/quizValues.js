@@ -1,6 +1,6 @@
 
 const options = ['A', 'B', 'C', 'D'];
-const correctAnswers = ['D', 'B', 'B', 'A'];
+const correctAnswers = ['D', 'B', 'B', 'D'];
 const questions = [
     {
         question: '1. In your JavaScript code, how do you find out which character occurs at the 5th position in a string "How are you"?',
@@ -21,9 +21,12 @@ const questions = [
         ]
     },
     {
-        question: '4. Which of the following is the minimum browser version that supports JavaScript?',
+        question: '4. Which statement is wrong about forEach and for loop?',
         selections: [
-            'Navigator v2.0', 'Mozilla v1.5', 'IE 2.0', 'Navigator v1.0'
+            'There is no way we can break/return from the callback in case of forEach loop',
+            'forEach only iterates through arrays',
+            'await cannot be used with forEach',
+            'forEach loops cannot be nested'
         ]
     }
 ];
