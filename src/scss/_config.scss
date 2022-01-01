@@ -61,12 +61,11 @@ a {
 @mixin input-control($mainColour: #273746, $backgroundColour: #fff) {
   color: $mainColour;
   background-color: $backgroundColour;
-  display: block;
+  display: inline-block;
   width: 100%;
   padding: 0.5rem 0.75rem;
   font-size: 1rem;
   font-weight: 500;
-  background-clip: padding-box;
   box-shadow: 0 0 0 3px transparent;
   border-radius: 0.25rem;
   border: 1px solid lighten($mainColour, $amount: 20);
