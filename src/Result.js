@@ -13,7 +13,7 @@ const Result = () => {
     });
 
     const getData = () => {
-        db.collection('users').get().then((snapshot) => {
+        db.collection('users').orderBy('createdAt').get().then((snapshot) => {
             setIsPending(false);
             setError(null);
             if (snapshot.empty && snapshot.metadata.fromCache) {
@@ -30,7 +30,7 @@ const Result = () => {
                         ...prev,
                         { name, email, score, created, id: doc.id }
                     ]);
-                    console.log(doc.data());
+                    //console.log(doc.data());
                 });
             }
         }).catch((err) => {

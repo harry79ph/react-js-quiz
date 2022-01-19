@@ -69,8 +69,8 @@ const Quiz = ({ details, setDetails }) => {
                                 {q.selections.map((selection, i) => {
                                     return (
                                         <div className="selection">
-                                            <input type="radio" name={'q' + index} defaultValue={options[i]} required="required" />
-                                            <label>{selection}</label>
+                                            <input type="radio" name={'q' + index} id={'q' + index + i} defaultValue={options[i]} required="required" />
+                                            <label for={'q' + index + i}>{selection}</label>
                                         </div>
                                     );
                                 })}
@@ -79,7 +79,7 @@ const Quiz = ({ details, setDetails }) => {
                     })}
                 </div>
                 <div className="button-group">
-                    {(details && !isPending) && <input className="myBtn" type="submit"/>}
+                    {(details && !isPending) && <input className="myBtn" type="submit" value="Submit"/>}
                     {isPending && <button className="myBtn loader">Loading</button>}
                     {(!details && !isPending) && <Link to="/result" className="myBtn">See all results</Link>}
                 </div>

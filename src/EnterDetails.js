@@ -40,7 +40,7 @@ const EnterDetails = ({ details, setDetails }) => {
                         ></input>
                     </div>
                     <div className="buttons">
-                        <input type="submit" className="myBtn"></input>
+                        <input type="submit" className="myBtn" value="Submit"></input>
                         <Link to="/" className="myBtn">Cancel</Link>
                     </div>
                 </form>
