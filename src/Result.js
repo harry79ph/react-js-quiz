@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import useAlert from './useAlert';
-import firebase from './fbConfig';
+import firebase from './data/fbConfig';
 
 const Result = () => {
 
@@ -77,20 +77,22 @@ const Result = () => {
                 {(!isPending && users) && <div>
                     <p className="title">All Results</p>
                     <table>
-                        <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Date</th>
-                            <th>Score</th>
-                        </tr>
-                        {users.map((user, key) => (
-                            <tr key={key}>
-                                <td>{user.name}</td>
-                                <td>{user.email}</td>
-                                <td>{user.created}</td>
-                                <td className="score">{user.score}<button id={user.id} className="myBtn" onClick={handleDelete}>Delete User</button></td>
+                        <tbody>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Date</th>
+                                <th>Score</th>
                             </tr>
-                        ))}
+                            {users.map((user) => (
+                                <tr key={user.id}>
+                                    <td>{user.name}</td>
+                                    <td>{user.email}</td>
+                                    <td>{user.created}</td>
+                                    <td className="score">{user.score}<button id={user.id} className="myBtn" onClick={handleDelete}>Delete User</button></td>
+                                </tr>
+                            ))}
+                        </tbody>
                     </table></div>}
             </div>
         </div>

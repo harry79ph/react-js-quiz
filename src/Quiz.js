@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import useAlert from './useAlert';
-import quizValues from './quizValues';
-import firebase from './fbConfig';
+import quizValues from './data/quizValues';
+import firebase from './data/fbConfig';
 
 
 const Quiz = ({ details, setDetails }) => {
@@ -64,13 +64,13 @@ const Quiz = ({ details, setDetails }) => {
                 <div className="questions">
                     {questions.map((q, index) => {
                         return (
-                            <div className="question">
+                            <div className="question" key={'q'+q.id}>
                                 <p>{q.question}</p>
                                 {q.selections.map((selection, i) => {
                                     return (
-                                        <div className="selection">
+                                        <div className="selection" key={'q' + index + i}>
                                             <input type="radio" name={'q' + index} id={'q' + index + i} defaultValue={options[i]} required="required" />
-                                            <label for={'q' + index + i}>{selection}</label>
+                                            <label htmlFor={'q' + index + i}>{selection}</label>
                                         </div>
                                     );
                                 })}
