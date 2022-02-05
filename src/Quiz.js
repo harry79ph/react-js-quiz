@@ -47,7 +47,7 @@ const Quiz = ({ details, setDetails }) => {
             setIsPending(true);
             db.collection('users').add(details).then((snapshot) => {
                 setIsPending(false);
-                console.log(snapshot);
+                //console.log(snapshot);
                 showAlert(details.score);
                 setDetails(null);
             }).catch((err) => {

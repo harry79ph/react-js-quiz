@@ -237,19 +237,25 @@ nav {
   }
   .wrapper {
     margin: 5em auto;
-
+    max-width: 800px;
     .title {
       font-size: 20px;
       font-weight: 500;
       padding: 30px 5px;
       text-align: center;
     }
+    .button-wrapper{
+      text-align: end;
+      .myBtn {
+        margin: 0.15rem;
+        padding: 0.2rem 0.5rem;
+      }
+    }
     table {
       box-shadow: 5px 5px 12px 4px rgba(0, 0, 0, 0.05);
       border-collapse: collapse;
       font-size: 18px;
       margin: 0 auto;
-      max-width: 800px;
       text-align: start;
       tr {
         background-color: lighten($main-colour, 25);
@@ -325,6 +331,7 @@ nav {
       text-align: center;
     }
     .wrapper {
+      margin: 3vh auto;
       div {
         margin: 3px;
         overflow-y: auto;

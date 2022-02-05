@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import useAlert from './useAlert';
 import firebase from './data/fbConfig';
+import Table from "./Table";
 
 const Result = () => {
 
@@ -19,19 +20,16 @@ const Result = () => {
             if (snapshot.empty && snapshot.metadata.fromCache) {
                 throw new Error('Please check your connection');
             }
-            console.log(snapshot.docs.length);
             if (!snapshot.docs.length) {
                 setUsers(null);
             } else {
+                const results = [];
                 snapshot.docs.forEach(doc => {
                     const { name, email, score, createdAt } = doc.data();
-                    const created = createdAt.toDate().toString().slice(0, 21);
-                    setUsers((prev) => [
-                        ...prev,
-                        { name, email, score, created, id: doc.id }
-                    ]);
-                    //console.log(doc.data());
+                    const created = createdAt.toDate();
+                    results.push({name, email, score, created, id: doc.id});
                 });
+                setUsers(results);
             }
         }).catch((err) => {
             setIsPending(false);
@@ -50,7 +48,6 @@ const Result = () => {
         setIsPending(true);
         setUsers([]);
         const docID = e.target.getAttribute('id');
-        console.log(e);
         db.collection('users').doc(docID).delete().then(() => {
             setIsPending(false);
             setError(false);
@@ -62,7 +59,7 @@ const Result = () => {
             if (err.name !== 'TypeError') showAlert(err);
         });
     }
-    console.log(users);
+    //console.log(users);
 
     const handleReload = () => {
         getData();
@@ -76,24 +73,7 @@ const Result = () => {
                 {(!users && !isPending) && (!error && <p>No users found.</p>)}
                 {(!isPending && users) && <div>
                     <p className="title">All Results</p>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Date</th>
-                                <th>Score</th>
-                            </tr>
-                            {users.map((user) => (
-                                <tr key={user.id}>
-                                    <td>{user.name}</td>
-                                    <td>{user.email}</td>
-                                    <td>{user.created}</td>
-                                    <td className="score">{user.score}<button id={user.id} className="myBtn" onClick={handleDelete}>Delete User</button></td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table></div>}
+                    <Table users={users} handleDelete={handleDelete}/></div>}
             </div>
         </div>
     );
