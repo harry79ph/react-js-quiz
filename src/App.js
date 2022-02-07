@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import EnterDetails from './EnterDetails';
 import Home from './Home';
@@ -7,8 +6,6 @@ import Quiz from './Quiz';
 import Result from './Result';
 
 function App() {
-  
-  const [details, setDetails] = useState(null);
 
   return (
     <Router>
@@ -18,10 +15,10 @@ function App() {
             <Home />
           </Route>
           <Route exact path="/details">
-            <EnterDetails details={details} setDetails={setDetails} />
+            <EnterDetails />
           </Route>
           <Route path="/details/quiz">
-            <Quiz details={details} setDetails={setDetails} />
+            <Quiz />
           </Route>
           <Route path="/result">
             <Result />

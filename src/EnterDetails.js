@@ -1,8 +1,10 @@
 import { useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import { MainState } from './context/Context';
 
-const EnterDetails = ({ details, setDetails }) => {
+const EnterDetails = () => {
 
+    const { details, setDetails } = MainState();
     const history = useHistory();
 
     useEffect(() => {

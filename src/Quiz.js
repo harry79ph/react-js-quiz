@@ -3,9 +3,12 @@ import { Link, useHistory } from 'react-router-dom';
 import useAlert from './useAlert';
 import quizValues from './data/quizValues';
 import firebase from './data/fbConfig';
+import { MainState } from './context/Context';
 
 
-const Quiz = ({ details, setDetails }) => {
+const Quiz = () => {
+
+    const { details, setDetails } = MainState();
 
     const db = firebase.firestore();
     const { options, correctAnswers, questions } = quizValues;
@@ -43,11 +46,10 @@ const Quiz = ({ details, setDetails }) => {
     },[]);
 
     useEffect(() => {
-        if (details !== null && details.score) {
+        if (details !== null && details.score >= 0) {
             setIsPending(true);
             db.collection('users').add(details).then((snapshot) => {
                 setIsPending(false);
-                //console.log(snapshot);
                 showAlert(details.score);
                 setDetails(null);
             }).catch((err) => {
