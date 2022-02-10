@@ -8,11 +8,10 @@ import { MainState } from './context/Context';
 
 const Quiz = () => {
 
-    const { details, setDetails } = MainState();
-
-    const db = firebase.firestore();
+    const { state, dispatch } = MainState();
     const { options, correctAnswers, questions } = quizValues;
     const [isPending, setIsPending] = useState(false);
+    const db = firebase.firestore();
     const history = useHistory();
     const { showAlert } = useAlert('question', () => {
         history.push('/result');
@@ -31,7 +30,10 @@ const Quiz = () => {
             if (answer === correctAnswers[i]) counter++;
         });
         const userPoints = (counter / correctAnswers.length) * 100;
-        setDetails(prev => ({ ...prev, score: userPoints, createdAt: timeStamp }));
+        dispatch({
+            type: 'ADD_DETAILS',
+            payload: { score: userPoints, createdAt: timeStamp }
+        });
     }
 
     useEffect(() => {
@@ -46,18 +48,21 @@ const Quiz = () => {
     },[]);
 
     useEffect(() => {
-        if (details !== null && details.score >= 0) {
+        if (state.details && state.details.score >= 0) {
             setIsPending(true);
-            db.collection('users').add(details).then((snapshot) => {
+            db.collection('users').add(state.details).then((snapshot) => {
                 setIsPending(false);
-                showAlert(details.score);
-                setDetails(null);
+                showAlert(state.details.score);
+                dispatch({
+                    type: 'RESET_DETAILS',
+                    payload: null
+                });
             }).catch((err) => {
                 console.error("Error adding document: ", err);
             });
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [details]);
+    }, [state.details]);
 
     return (
         <div className="quiz">
@@ -81,9 +86,9 @@ const Quiz = () => {
                     })}
                 </div>
                 <div className="button-group">
-                    {(details && !isPending) && <input className="myBtn" type="submit" value="Submit"/>}
+                    {(state.details && !isPending) && <input className="myBtn" type="submit" value="Submit"/>}
                     {isPending && <button className="myBtn loader">Loading</button>}
-                    {(!details && !isPending) && <Link to="/result" className="myBtn">See all results</Link>}
+                    {(!state.details && !isPending) && <Link to="/result" className="myBtn">See all results</Link>}
                 </div>
             </form>
         </div>

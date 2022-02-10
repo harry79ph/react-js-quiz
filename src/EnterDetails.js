@@ -4,19 +4,25 @@ import { MainState } from './context/Context';
 
 const EnterDetails = () => {
 
-    const { details, setDetails } = MainState();
+    const { state, dispatch } = MainState();
     const history = useHistory();
 
     useEffect(() => {
-        if (details !== null) {
-            setDetails(null);
+        if (state.details !== null) {
+           dispatch({
+            type: 'RESET_ALL',
+            payload: null
+           });
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const handleSubmit = e => {
         e.preventDefault();
-        setDetails({ name: e.target.name.value.trim(), email: e.target.email.value.trim() });
+        dispatch({
+            type: 'ADD_DETAILS',
+            payload: { name: e.target.name.value.trim(), email: e.target.email.value.trim() }
+        });
         history.push('/details/quiz');
     }
 

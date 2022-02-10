@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import useAlert from './useAlert';
 import firebase from './data/fbConfig';
 import Table from "./Table";
+import { MainState } from "./context/Context";
 
 const Result = () => {
 
-    const [users, setUsers] = useState([]);
+    const { state, dispatch } = MainState();
     const [isPending, setIsPending] = useState(true);
     const [error, setError] = useState(null);
     const db = firebase.firestore();
@@ -21,7 +22,10 @@ const Result = () => {
                 throw new Error('Please check your connection');
             }
             if (!snapshot.docs.length) {
-                setUsers(null);
+                dispatch({
+                    type: 'RESET_USERS',
+                    payload: null
+                });
             } else {
                 const results = [];
                 snapshot.docs.forEach(doc => {
@@ -29,11 +33,17 @@ const Result = () => {
                     const created = createdAt.toDate();
                     results.push({name, email, score, created, id: doc.id});
                 });
-                setUsers(results);
+                dispatch({
+                    type: 'ADD_USERS',
+                    payload: results
+                });
             }
         }).catch((err) => {
             setIsPending(false);
-            setUsers(null);
+            dispatch({
+                type: 'RESET_USERS',
+                payload: null
+            });
             console.log('get error name: ' + err.name + ' get error message: ' + err.message);
             showAlert(err);
         });
@@ -46,7 +56,10 @@ const Result = () => {
 
     const handleDelete = e => {
         setIsPending(true);
-        setUsers([]);
+        dispatch({
+            type: 'RESET_USERS',
+            payload: []
+        });
         const docID = e.target.getAttribute('id');
         db.collection('users').doc(docID).delete().then(() => {
             setIsPending(false);
@@ -54,12 +67,14 @@ const Result = () => {
             getData();
         }).catch(err => {
             setIsPending(false);
-            setUsers(null);
+            dispatch({
+                type: 'RESET_USERS',
+                payload: null
+            });
             console.log('delete error name: ' + err.name);
             if (err.name !== 'TypeError') showAlert(err);
         });
     }
-    //console.log(users);
 
     const handleReload = () => {
         getData();
@@ -70,10 +85,10 @@ const Result = () => {
             <div className="wrapper">
                 {isPending && <div className="loader">Loading</div>}
                 {error && <div className="error"><p>This page cannot be found...</p><button className="myBtn" onClick={handleReload}>Try again</button></div>}
-                {(!users && !isPending) && (!error && <p>No users found.</p>)}
-                {(!isPending && users) && <div>
+                {(!state.users && !isPending) && (!error && <p>No users found.</p>)}
+                {(!isPending && state.users) && <div>
                     <p className="title">All Results</p>
-                    <Table users={users} handleDelete={handleDelete}/></div>}
+                    <Table handleDelete={handleDelete}/></div>}
             </div>
         </div>
     );

@@ -1,30 +1,25 @@
-import { useEffect, useState } from "react";
+import { MainState } from "./context/Context";
 
-const Table = ({ users, handleDelete }) => {
+const Table = ({ handleDelete }) => {
 
-    const [order, setOrder] = useState([]);
-
-    useEffect(() => {
-        setOrder(users);
-    }, [users]);
-
-    const handleSort = (p) => {
-        if (p === 'name') {
-            setOrder(prev => [...prev].sort((a, b) => a.name > b.name ? 1 : -1));
-        } else if (p === 'score') {
-            setOrder(prev => [...prev].sort((a, b) => a.score - b.score));
-        } else {
-            setOrder(prev => [...prev].sort((a, b) => a.created.getTime() - b.created.getTime()));
-        }
-    }
+    const { state, dispatch } = MainState();
 
     return (
         <div>
             <div className="button-wrapper">
                 <span>Sort By:</span>
-                <button className="myBtn" onClick={() => {handleSort('name')}}>name</button>
-                <button className="myBtn" onClick={() => {handleSort('score')}}>score</button>
-                <button className="myBtn" onClick={() => {handleSort('date')}}>date</button>
+                <button className="myBtn" onClick={() => {dispatch({
+                    type: 'SORT_USERS',
+                    payload: 'name'
+                })}}>name</button>
+                <button className="myBtn" onClick={() => {dispatch({
+                    type: 'SORT_USERS',
+                    payload: 'score'
+                })}}>score</button>
+                <button className="myBtn" onClick={() => {dispatch({
+                    type: 'SORT_USERS',
+                    payload: 'date'
+                })}}>date</button>
             </div>
             <table>
                 <tbody>
@@ -34,7 +29,7 @@ const Table = ({ users, handleDelete }) => {
                         <th>Date</th>
                         <th>Score</th>
                     </tr>
-                    {order.map((user) => (
+                    {state.users.map((user) => (
                         <tr key={user.id}>
                             <td>{user.name}</td>
                             <td>{user.email}</td>
