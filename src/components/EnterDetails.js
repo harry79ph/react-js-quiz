@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { MainState } from './context/Context';
+import { MainState } from '../context/Context';
 
 const EnterDetails = () => {
 

@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import useAlert from './useAlert';
-import quizValues from './data/quizValues';
-import firebase from './data/fbConfig';
-import { MainState } from './context/Context';
+import quizValues from '../data/quizValues';
+import firebase from '../data/fbConfig';
+import { MainState } from '../context/Context';
 
 
 const Quiz = () => {

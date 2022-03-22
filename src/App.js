@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import EnterDetails from './EnterDetails';
-import Home from './Home';
-import Navbar from './Navbar';
-import Quiz from './Quiz';
-import Result from './Result';
+import EnterDetails from './components/EnterDetails';
+import Home from './components/Home';
+import Navbar from './components/Navbar';
+import Quiz from './components/Quiz';
+import Result from './components/Result';
 
 function App() {
 

@@ -1,4 +1,4 @@
-import { MainState } from "./context/Context";
+import { MainState } from "../context/Context";
 
 const Table = ({ handleDelete }) => {
 

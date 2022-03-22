@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import useAlert from './useAlert';
-import firebase from './data/fbConfig';
+import firebase from '../data/fbConfig';
 import Table from "./Table";
-import { MainState } from "./context/Context";
+import { MainState } from "../context/Context";
 
 const Result = () => {
 
