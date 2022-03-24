@@ -13,6 +13,7 @@ const Result = () => {
     const { showAlert } = useAlert('error', () => {
         setError(true);
     });
+    console.log(state);
 
     const getData = () => {
         db.collection('users').orderBy('createdAt').get().then((snapshot) => {
@@ -54,6 +55,13 @@ const Result = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    useEffect(() => {
+        dispatch({
+            type: 'GET_LIST',
+            payload: state.users
+        });
+    }, [dispatch, state.users]);
+
     const handleDelete = e => {
         setIsPending(true);
         dispatch({
@@ -80,6 +88,37 @@ const Result = () => {
         getData();
     }
 
+    const handleSearch = (e) => {
+        const value = e.target.value;
+        if (value === "") {
+            dispatch({
+                type: 'GET_LIST',
+                payload: state.users
+            });
+        } else {
+            dispatch({
+                type: 'FILTER_LIST',
+                payload: value
+            });
+        }
+    };
+
+    // const handleSearch = (e) => {
+    //     const value = e.target.value;
+    //     const filteredList = state.users.filter((item) => {
+    //       return item.name.toLowerCase().includes(value.toLowerCase())
+    //     });
+    //     console.log(filteredList);
+    //     if (value === "") {
+    //         listDispatch({
+    //             type: 'GET_LIST',
+    //             payload: state.users
+    //         });
+    //     } else {
+    //         setList(filteredList);
+    //     }
+    // };
+
     return (
         <div className="results">
             <div className="wrapper">
@@ -88,7 +127,7 @@ const Result = () => {
                 {(!state.users && !isPending) && (!error && <p>No users found.</p>)}
                 {(!isPending && state.users) && <div>
                     <p className="title">All Results</p>
-                    <Table handleDelete={handleDelete}/></div>}
+                    <Table list={state.list} handleDelete={handleDelete} handleSearch={handleSearch}/></div>}
             </div>
         </div>
     );

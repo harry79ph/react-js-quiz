@@ -244,14 +244,35 @@ nav {
       padding: 30px 5px;
       text-align: center;
     }
-    .button-wrapper{
-      text-align: end;
-      .myBtn {
-        margin: 0.15rem;
-        padding: 0.2rem 0.5rem;
+    .list-control {
+      display: flex;
+      justify-content: space-between;
+      .search-section {
+        input {
+          height: 28px;
+          padding: 0.5rem 0.75rem;
+          margin-left: 0.2rem;
+          font-size: 1rem;
+          font-weight: 500;
+          box-shadow: 0 0 0 3px transparent;
+          border-radius: 0.25rem;
+          border: 1px solid darken($shadow-color, 20);
+          transition: box-shadow 0.15s ease-in-out;
+          &:focus {
+            outline: 0;
+            box-shadow: 0 0 0 3px lighten($shadow-color, 25);
+          }
+        }
+      }
+      .sort-buttons {
+        .myBtn {
+          margin: 0.15rem;
+          padding: 0.2rem 0.5rem;
+        }
       }
     }
     table {
+      width: 100%;
       box-shadow: 5px 5px 12px 4px rgba(0, 0, 0, 0.05);
       border-collapse: collapse;
       font-size: 18px;
@@ -336,6 +357,9 @@ nav {
       div {
         margin: 3px;
         overflow-y: auto;
+        .list-control {
+          flex-direction: column-reverse;
+        }
         table {
           font-size: 14px;
           max-width: 100%;

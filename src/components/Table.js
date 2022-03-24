@@ -1,25 +1,31 @@
 import { MainState } from "../context/Context";
 
-const Table = ({ handleDelete }) => {
+const Table = ({ list, handleSearch, handleDelete }) => {
 
-    const { state, dispatch } = MainState();
+    const { dispatch } = MainState();
 
     return (
         <div>
-            <div className="button-wrapper">
-                <span>Sort By:</span>
-                <button className="myBtn" onClick={() => {dispatch({
-                    type: 'SORT_USERS',
-                    payload: 'name'
-                })}}>name</button>
-                <button className="myBtn" onClick={() => {dispatch({
-                    type: 'SORT_USERS',
-                    payload: 'score'
-                })}}>score</button>
-                <button className="myBtn" onClick={() => {dispatch({
-                    type: 'SORT_USERS',
-                    payload: 'date'
-                })}}>date</button>
+            <div className="list-control">
+                <div className="search-section">
+                    <label htmlFor="search">Search By Name: </label>
+                    <input id="search" type="text" onChange={handleSearch}/>
+                </div>
+                <div className="sort-buttons">
+                    <span>Sort By:</span>
+                    <button className="myBtn" onClick={() => {dispatch({
+                        type: 'SORT_USERS',
+                        payload: 'name'
+                    })}}>name</button>
+                    <button className="myBtn" onClick={() => {dispatch({
+                        type: 'SORT_USERS',
+                        payload: 'score'
+                    })}}>score</button>
+                    <button className="myBtn" onClick={() => {dispatch({
+                        type: 'SORT_USERS',
+                        payload: 'date'
+                    })}}>date</button>
+                </div>
             </div>
             <table>
                 <tbody>
@@ -29,7 +35,7 @@ const Table = ({ handleDelete }) => {
                         <th>Date</th>
                         <th>Score</th>
                     </tr>
-                    {state.users.map((user) => (
+                    {list.map((user) => (
                         <tr key={user.id}>
                             <td>{user.name}</td>
                             <td>{user.email}</td>

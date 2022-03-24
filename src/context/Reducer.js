@@ -1,10 +1,15 @@
 export const initialState = {
     details: {},
-    users: []
+    users: [],
+    list: []
 };
 
 export const appReducer = (state, action) => {
     switch (action.type) {
+        case 'GET_LIST':
+            return {
+                ...state, list: [...action.payload]
+            }
         case 'RESET_ALL':
             return initialState;
         case 'RESET_DETAILS':
@@ -36,6 +41,10 @@ export const appReducer = (state, action) => {
                 return {
                     ...state, users: [...state.users].sort((a, b) => a.created.getTime() - b.created.getTime())
                 }
+            }
+            case 'FILTER_LIST':
+            return {
+                ...state, list: [...state.users].filter((item) => item.name.toLowerCase().includes(action.payload.toLowerCase()))
             }
         default:
             return state;
