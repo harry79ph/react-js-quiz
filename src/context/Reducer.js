@@ -31,7 +31,7 @@ export const appReducer = (state, action) => {
         case 'SORT_USERS':
             if (action.payload === 'name') {
                 return {
-                    ...state, users: [...state.users].sort((a, b) => a.name > b.name ? 1 : -1)
+                    ...state, users: [...state.users].sort((a, b) => a.name.localeCompare(b.name))
                 }
             } else if (action.payload === 'score') {
                 return {

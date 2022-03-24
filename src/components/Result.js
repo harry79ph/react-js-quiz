@@ -13,7 +13,6 @@ const Result = () => {
     const { showAlert } = useAlert('error', () => {
         setError(true);
     });
-    console.log(state);
 
     const getData = () => {
         db.collection('users').orderBy('createdAt').get().then((snapshot) => {
@@ -102,22 +101,6 @@ const Result = () => {
             });
         }
     };
-
-    // const handleSearch = (e) => {
-    //     const value = e.target.value;
-    //     const filteredList = state.users.filter((item) => {
-    //       return item.name.toLowerCase().includes(value.toLowerCase())
-    //     });
-    //     console.log(filteredList);
-    //     if (value === "") {
-    //         listDispatch({
-    //             type: 'GET_LIST',
-    //             payload: state.users
-    //         });
-    //     } else {
-    //         setList(filteredList);
-    //     }
-    // };
 
     return (
         <div className="results">
