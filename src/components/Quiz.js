@@ -1,30 +1,21 @@
-import { useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import useAlert from './useAlert';
+import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import quizValues from '../data/quizValues';
-import firebase from '../data/fbConfig';
 import { MainState } from '../context/Context';
+import useFirebase from './useFirebase';
 
 
 const Quiz = () => {
 
     const { state, dispatch } = MainState();
     const { options, correctAnswers, questions } = quizValues;
-    const [isPending, setIsPending] = useState(false);
-    const db = firebase.firestore();
-    const history = useHistory();
-    const { showAlert } = useAlert('question', () => {
-        history.push('/result');
-    });
-    const { showAlert: showErr } = useAlert('error', () => {
-        history.push('/');
-    });
+    const { getTimeStamp, checkConnection, addUser, isPending } = useFirebase();
 
     function onSubmit(e) {
         e.preventDefault();
         const userAnswers = [e.target.q0.value, e.target.q1.value, e.target.q2.value, e.target.q3.value];
         const now = new Date();
-        const timeStamp = firebase.firestore.Timestamp.fromDate(now);
+        const timeStamp = getTimeStamp(now);
         let counter = 0;
         userAnswers.forEach((answer, i) => {
             if (answer === correctAnswers[i]) counter++;
@@ -37,31 +28,12 @@ const Quiz = () => {
     }
 
     useEffect(() => {
-        db.collection('users').get().then((ss) => {
-            if (ss.empty && ss.metadata.fromCache) {
-                throw new Error('Please check your connection');
-            }
-        }).catch(err => {
-            showErr(err);
-        });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[]);
+        checkConnection();
+    },[checkConnection]);
 
     useEffect(() => {
-        if (state.details && state.details.score >= 0) {
-            setIsPending(true);
-            db.collection('users').add(state.details).then((snapshot) => {
-                setIsPending(false);
-                showAlert(state.details.score);
-                dispatch({
-                    type: 'RESET_DETAILS',
-                    payload: null
-                });
-            }).catch((err) => {
-                console.error("Error adding document: ", err);
-            });
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        addUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [state.details]);
 
     return (

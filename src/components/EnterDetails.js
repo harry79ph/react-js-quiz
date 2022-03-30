@@ -4,16 +4,11 @@ import { MainState } from '../context/Context';
 
 const EnterDetails = () => {
 
-    const { state, dispatch } = MainState();
+    const { dispatch } = MainState();
     const history = useHistory();
 
     useEffect(() => {
-        if (state.details !== null) {
-           dispatch({
-            type: 'RESET_ALL',
-            payload: null
-           });
-        }
+        dispatch({ type: 'RESET_ALL', payload: null });
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
