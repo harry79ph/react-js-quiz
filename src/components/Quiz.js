@@ -9,7 +9,7 @@ const Quiz = () => {
 
     const { state, dispatch } = MainState();
     const { options, correctAnswers, questions } = quizValues;
-    const { getTimeStamp, checkConnection, addUser, isPending } = useFirebase();
+    const { animate, getTimeStamp, checkConnection, addUser, isPending } = useFirebase();
 
     function onSubmit(e) {
         e.preventDefault();
@@ -37,7 +37,7 @@ const Quiz = () => {
     }, [state.details]);
 
     return (
-        <div className="quiz">
+        <div className={"quiz animate__animated " + animate }>
             <h4>You will get 25 points for each correct answer. At the end of the Quiz, your total score will be displayed. Maximum score is 100 points.</h4>
             <form onSubmit={onSubmit}>
                 <div className="questions">

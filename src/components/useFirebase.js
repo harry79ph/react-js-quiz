@@ -9,14 +9,18 @@ const useFirebase = () => {
     const { state, dispatch } = MainState();
     const [isPending, setIsPending] = useState(false);
     const [error, setError] = useState(null);
+    const [animate, setAnimate] = useState("animate__fadeInRight");
     const history = useHistory();
     const db = firebase.firestore();
-    const { showAlert: showQuestion } = useAlert("question", () => history.push("/result"));
+    const { showAlert: showQuestion } = useAlert("question", () => {
+        setTimeout(() => {
+            history.push("/result");
+        }, 1000);
+        setAnimate("animate__fadeOutLeft")
+    });
     const { showAlert: showErr } = useAlert("error", () => history.push("/"));
 
-    const getTimeStamp = (time) => {
-        return firebase.firestore.Timestamp.fromDate(time);
-    };
+    const getTimeStamp = (time) => firebase.firestore.Timestamp.fromDate(time);
 
     const checkConnection = () => {
         db.collection("users").get()
@@ -103,7 +107,7 @@ const useFirebase = () => {
             if (err.name !== 'TypeError') showErr(err);
         });
     }
-    return { isPending, error, checkConnection, getTimeStamp, addUser, getUsers, deleteUser };
+    return { isPending, error, animate, checkConnection, getTimeStamp, addUser, getUsers, deleteUser };
 };
 
 export default useFirebase;

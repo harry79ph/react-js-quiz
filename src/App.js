@@ -4,6 +4,7 @@ import Home from './components/Home';
 import Navbar from './components/Navbar';
 import Quiz from './components/Quiz';
 import Result from './components/Result';
+import 'animate.css';
 
 function App() {
 

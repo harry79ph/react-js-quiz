@@ -40,7 +40,7 @@ const Result = () => {
 
     return (
         <div className="results">
-            <div className="wrapper">
+            <div className="wrapper animate__animated animate__fadeInRight">
                 {isPending && <div className="loader">Loading</div>}
                 {error && <div className="error"><p>This page cannot be found...</p><button className="myBtn" onClick={() => getUsers()}>Try again</button></div>}
                 {(!state.users && !isPending) && (!error && <p>No users found.</p>)}
