@@ -5,6 +5,7 @@ body {
   color: darken($nav-background-color, 45);
   background-color: lighten($nav-background-color, $amount: 44);
   min-height: 800px;
+  overflow-x: hidden;
 }
 
 .form-check label {
