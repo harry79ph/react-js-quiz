@@ -9,10 +9,14 @@ const Table = ({ list, handleSearch, handleDelete }) => {
             <div className="list-control">
                 <div className="search-section">
                     <label htmlFor="search">Search By Name: </label>
-                    <input id="search" type="text" onChange={handleSearch}/>
+                    <input id="search" type="text" autoFocus onChange={handleSearch}/>
                 </div>
                 <div className="sort-buttons">
                     <span>Sort By:</span>
+                    <button className="myBtn" onClick={() => {dispatch({
+                        type: 'SORT_USERS',
+                        payload: 'date'
+                    })}}>date</button>
                     <button className="myBtn" onClick={() => {dispatch({
                         type: 'SORT_USERS',
                         payload: 'name'
@@ -21,10 +25,6 @@ const Table = ({ list, handleSearch, handleDelete }) => {
                         type: 'SORT_USERS',
                         payload: 'score'
                     })}}>score</button>
-                    <button className="myBtn" onClick={() => {dispatch({
-                        type: 'SORT_USERS',
-                        payload: 'date'
-                    })}}>date</button>
                 </div>
             </div>
             <table>

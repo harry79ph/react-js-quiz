@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { MainState } from '../context/Context';
 
@@ -7,9 +7,13 @@ const EnterDetails = () => {
     const { dispatch } = MainState();
     const history = useHistory();
     const [animate, setAnimate] = useState("animate__fadeInRight");
+    const inputRef = useRef();
 
     useEffect(() => {
         dispatch({ type: 'RESET_ALL', payload: null });
+        setTimeout(() => {
+            inputRef.current.focus();  
+        }, 1000);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -36,6 +40,7 @@ const EnterDetails = () => {
                             type="text"
                             id="name"
                             required
+                            ref={inputRef}
                         />
                     </div>
                     <div className="form-group">
