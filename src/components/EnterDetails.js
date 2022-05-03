@@ -1,12 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useEffect, useRef } from 'react';
+import { useHistory } from 'react-router-dom';
 import { MainState } from '../context/Context';
 
 const EnterDetails = () => {
 
     const { dispatch } = MainState();
     const history = useHistory();
-    const [animate, setAnimate] = useState("animate__fadeInRight");
     const inputRef = useRef();
 
     useEffect(() => {
@@ -23,16 +22,13 @@ const EnterDetails = () => {
             type: 'ADD_DETAILS',
             payload: { name: e.target.name.value.trim(), email: e.target.email.value.trim() }
         });
-        setTimeout(() => {
-            history.push('/details/quiz');
-        }, 1000);
-        setAnimate("animate__fadeOutLeft");
+        history.push('/details/quiz');
     }
 
     return (
         <div className="enter-details">
-            <div className={"create animate__animated " + animate}>
-                <h2>Please fill in the form</h2>
+            <div className="create animate__animated animate__fadeInRight">
+                <h3>Name and Email fields are required</h3>
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
                         <label>Name</label>
@@ -53,7 +49,6 @@ const EnterDetails = () => {
                     </div>
                     <div className="buttons">
                         <input type="submit" className="myBtn" value="Submit"></input>
-                        <Link to="/" className="myBtn">Cancel</Link>
                     </div>
                 </form>
             </div>

@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import EnterDetails from './components/EnterDetails';
 import Home from './components/Home';
 import Navbar from './components/Navbar';
 import Quiz from './components/Quiz';
@@ -14,9 +13,6 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Home />
-          </Route>
-          <Route exact path="/details">
-            <EnterDetails />
           </Route>
           <Route path="/details/quiz">
             <Quiz />

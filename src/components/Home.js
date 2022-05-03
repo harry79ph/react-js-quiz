@@ -1,13 +1,15 @@
-import { Link } from 'react-router-dom';
+import EnterDetails from './EnterDetails';
 
 const Home = () => {
 
     return (
-        <div className="home animate__animated animate__fadeInUp">
-            <h2>Welcome to JS Quiz</h2>
-            <p>Please click on Start Quiz button and fill in the form then you can start the quiz. Good luck!!</p>
-            <Link to="/details" className="myBtn" role="button">Start Quiz</Link>
-        </div>
+        <main>
+            <div className="home animate__animated animate__fadeInLeftBig">
+                <h2>Welcome to JS Quiz</h2>
+                <p>Please fill in the form then you can start the quiz by clicking Submit button. Good luck!!</p>
+            </div>
+            <EnterDetails />
+        </main>
     );
 }
 

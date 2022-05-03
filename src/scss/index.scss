@@ -47,9 +47,15 @@ nav {
   }
 }
 
+main {
+  display: flex;
+  margin: 0 10vw;
+}
+
 .home {
   margin: 20vh auto;
   text-align: center;
+  flex: 2;
   h2 {
     padding: 20px;
   }
@@ -66,12 +72,13 @@ nav {
 .enter-details {
   margin: 16vh auto;
   padding: 10px;
+  flex: 3;
   .create {
     max-width: 600px;
     min-height: 40vh;
     margin: 0 auto;
     @include white-block;
-    h2 {
+    h3 {
       padding: 1.2em;
       text-align: center;
     }
@@ -93,7 +100,7 @@ nav {
       }
       .buttons {
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
         margin: 5px;
         .myBtn {
           margin: 5px;
@@ -316,7 +323,17 @@ nav {
   nav {
     padding: 1px 8px;
   }
+  main {
+    flex-direction: column;
+    margin: 10vh 0;
+  }
+  .home {
+    flex: 1;
+    margin: 0;
+  }
   .enter-details {
+    flex: 1;
+    margin: 0;
     .create {
       width: 90vw;
       form {
