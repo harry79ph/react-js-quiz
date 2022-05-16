@@ -1,15 +1,23 @@
+import { useEffect, useRef } from "react";
 import { MainState } from "../context/Context";
 
 const Table = ({ list, handleSearch, handleDelete }) => {
 
     const { dispatch } = MainState();
+    const searchRef = useRef();
+
+    useEffect(() => {
+        setTimeout(() => {
+            searchRef.current.focus();
+        }, 1000);
+    });
 
     return (
         <div>
             <div className="list-control">
                 <div className="search-section">
                     <label htmlFor="search">Search By Name: </label>
-                    <input id="search" type="text" autoFocus onChange={handleSearch}/>
+                    <input id="search" type="text" ref={searchRef} onChange={handleSearch}/>
                 </div>
                 <div className="sort-buttons">
                     <span>Sort By:</span>
