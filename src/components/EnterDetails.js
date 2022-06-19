@@ -31,7 +31,7 @@ const EnterDetails = () => {
                 <h3>Name and Email fields are required</h3>
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
-                        <label>Name</label>
+                        <label htmlFor="name">Name</label>
                         <input
                             type="text"
                             id="name"
@@ -40,7 +40,7 @@ const EnterDetails = () => {
                         />
                     </div>
                     <div className="form-group">
-                        <label>Email</label>
+                        <label htmlFor="email">Email</label>
                         <input
                             required
                             id="email"

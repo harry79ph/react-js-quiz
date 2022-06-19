@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import Table from "./Table";
 import { MainState } from "../context/Context";
-import useFirebase from './useFirebase';
+import useFirebase from '../customhooks/useFirebase';
 
 const Result = () => {
 
