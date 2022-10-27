@@ -1,15 +1,14 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
 
-var firebaseConfig = {
-  apiKey: "AIzaSyAItH6vy_SHf4bL1FyzeQ83KOgm15imzL4",
-  authDomain: "js-quiz-750ad.firebaseapp.com",
-  databaseURL: "https://js-quiz-750ad-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "js-quiz-750ad",
-  storageBucket: "js-quiz-750ad.appspot.com",
-  messagingSenderId: "453035093656",
-  appId: "1:453035093656:web:5ffab7b34f9d7f4d4baaed",
-  measurementId: "G-JCNCMGRKS9"
+const firebaseConfig = {
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID
 };
 
 firebase.initializeApp(firebaseConfig);
